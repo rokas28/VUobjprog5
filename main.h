@@ -17,6 +17,6 @@ using std::vector;
 using std::set;
 using std::multiset;
 
-#define data "tekstas.txt"
+#define data "tekstas1.txt"
 
 #endif //VUOBJPROG5_MAIN_H
