@@ -2,7 +2,7 @@
 #include "word.h"
 
 int main() {
-
+    setlocale(LC_ALL, LOCALE_TYPE);
     multiset<Word> text;
     set<Word> words;
     set<string> url;
@@ -10,7 +10,8 @@ int main() {
 
     string eile;
     int nr = 0;
-    std::ifstream df (data);
+    std::ifstream df(data, std::ios::binary);
+    df.imbue(LOCALE);
     while(getline(df,eile)){
         nr++;
         std::istringstream iss(eile);
@@ -20,7 +21,10 @@ int main() {
                 url.insert(a);
             }
             else{
-                std::regex rgx("\\w+");
+                std::regex rgx(R"(^[-ĄČĘĖĮŠŲŪ ąčęėįšųū \n"
+                               "QWERTYUIOPASDFGHJKLZXCVBNM qwertyuiopasdfghjklzxcvbnm\n"
+                               "1234567890\n "
+                               "]+$)");
                 for( std::sregex_iterator it(a.begin(), a.end(), rgx), it_end; it != it_end; ++it ){
                     words.insert(Word((*it)[0]));
                     text.insert(Word((*it)[0],nr));

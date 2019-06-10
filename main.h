@@ -17,6 +17,8 @@ using std::vector;
 using std::set;
 using std::multiset;
 
-#define data "tekstas2.txt"
+#define data "tekstas3.txt"
+#define LOCALE_TYPE "lt_LT.UTF-8"
+const std::locale LOCALE(LOCALE_TYPE);
 
 #endif //VUOBJPROG5_MAIN_H
