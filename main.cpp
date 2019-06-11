@@ -33,10 +33,16 @@ int main() {
         }
     }
 
-    cout << "URL adresai, kurie yra tekste:" << endl;
-    for(auto i : url) cout << i << endl;
-    cout << endl;
+    std::ofstream rf ("rez.txt");
+    rf << "URL adresai, kurie yra tekste:" << endl;
+    for(auto i : url) rf << i << endl;
+    rf << endl;
 
+    vector<int> m;
+    vector<string> zdz;
+    vector<vector<int> > eill;
+
+    int y = 0;
     for(auto it = words.begin(); it != words.end(); ++it){
         auto n = 0;
         eil.clear();
@@ -46,12 +52,40 @@ int main() {
                 eil.push_back(i->get_eil());
             }
         }
-        if(n >= 2){
-            cout << it->get_text() << " tekste pasikartojo " << n << " kartus siose eilutese: ";
-            for(auto i : eil)cout << i << " ";
-            cout << endl;
+        if(n >= 2 ){
+            eill.push_back(eil);
+            m.push_back(n);
+            zdz.push_back(it->get_text());
+            rf << it->get_text() << " tekste pasikartojo " << n << " kartus siose eilutese: ";
+            for(auto i : eil){
+                rf << i << " ";
+            }
+            rf << endl;
+            y++;
         }
     }
 
+    for(int h =2; h < 50; h++){
+        for ( unsigned X = 0; X <= y/2; X++ ) {
+            if(m[X]==h) {
+                cout << zdz[X] << " pasikartojo " << m[X] << " kartus: ";
+                int a = 99999;
+                for (auto i: eill[X]){
+                    if(i != a){
+                        cout << i << " ";
+                    }
+                    a = i;
+                }
+                cout << "\t\t" << zdz[X + y / 2] << " pasikartojo " << m[X + y / 2] << " kartus: ";
+                for (auto i: eill[X + y / 2]){
+                    if(i != a){
+                        cout << i << " ";
+                    }
+                    a = i;
+                }
+                cout << endl;
+            }
+        }
+    }
     return 0;
 }

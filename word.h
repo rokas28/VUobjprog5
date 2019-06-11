@@ -13,4 +13,11 @@ public:
     int get_eil() const { return eil; };
     bool operator< (const Word &word) const { return (this->text < word.text); };
 };
+
+/*void rusiavimas(std::set<Word>& word) {
+    sort(word.begin(), word.end(), [](const Word &lhs, const Word &rhs) {
+        return ( lhs.get_text() > rhs.get_text() );
+    });
+};*/
+
 #endif //VUOBJPROG5_WORD_H
